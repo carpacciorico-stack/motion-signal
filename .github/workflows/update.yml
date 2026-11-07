@@ -3,6 +3,7 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '17 0 * * *'
+
 permissions:
   contents: write
   pages: write
@@ -19,7 +20,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Install free translation engine
+        run: |
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install argostranslate
       - run: python collect.py
+      - name: Translate titles and excerpts into Japanese
+        run: python translate.py
       - name: Save articles
         run: |
           git config user.name 'github-actions[bot]'
