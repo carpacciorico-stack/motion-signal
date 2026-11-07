@@ -54,15 +54,36 @@ def iso_date(value):
     try:return datetime.fromisoformat(value.replace('Z','+00:00')).astimezone(timezone.utc).isoformat()
     except Exception:return None
 
+STUDIOS = ('buck', 'ordinary folk', 'giant ant', 'manvsmachine', 'man vs machine', 'tendril', 'nuke', 'animade', 'odd fellows', 'oddfellows', 'hornet', 'psyop', 'framestore', 'the mill', 'mill+', 'nexus', 'nørlum', 'future deluxe', 'territory studio', 'panoply', 'builders club', 'blinkink', 'aardman', 'black kite', 'axis studios', 'woodblock', 'onesal', 'view', 'bleed', 'golden wolf')
+QUESTION = re.compile(r"\?|help|issue|error|problem|crash|not working|won.t|can.t|how (do|can|to)|why |beginner|roast|feedback|judge|hiring|job opening|for hire|giveaway|ethics|エラー|不具合|質問|助け|できない", re.I)
+TOOLS = re.compile(r"script|plugin|plug-in|extension|preset|tool|release|update|new feature|what.s new|beta|launch|introduc|スクリプト|プラグイン|新機能|アップデート", re.I)
+VIDEO = re.compile(r"after effects|\bae\b|premiere|davinci|resolve|cinema 4d|blender|animation|motion|composit|vfx|video|redshift|octane", re.I)
+ANNOUNCEMENT = re.compile(r"releas|launch|introduc|new feature|what.s new|now available|free (script|plugin|tool)|made (a|an|my) (script|plugin|tool)|built (a|an) (script|plugin|tool)", re.I)
+
+def select_item(title, summary, source):
+    text = title + ' ' + summary
+    if QUESTION.search(title): return None
+    if source == 'Stash — Studio Films':
+        if any(re.search(r'(?<!\w)' + re.escape(name) + r'(?!\w)', text, re.I) for name in STUDIOS):
+            return ('studio', 'design', 78, 'スタジオ作品の演出・質感・モーション表現を制作の参考にできます。')
+        return None
+    if source == 'Toolfarm — Tools & Updates' and TOOLS.search(text) and VIDEO.search(text):
+        return ('tool', 'tools', 75, '紹介されているツールや新機能が制作工程の短縮に役立つか確認できます。')
+    if source == 'Reddit After Effects' and TOOLS.search(title) and ANNOUNCEMENT.search(title):
+        return ('tool', 'tools', 65, '公開された制作ツール・新機能を確認できます。対応バージョンと提供元を確認してください。')
+    return None
+
 def score_item(title, summary, category):
-    s=(title+' '+summary).lower()
-    if any(x in s for x in REJECT):return 0
-    matches=sum(v for k,v in KEYWORDS.items() if k in s)
-    # Heuristic relevance, never advertised as a verified AI evaluation.
-    return min(90,35+matches) if matches else 25
+    return 0 if QUESTION.search(title) else 65
 
 def build(feeds,previous):
-    seen={a['id']:a for a in previous if isinstance(a,dict) and a.get('id')}
+    seen={}
+    for a in previous:
+        if not isinstance(a,dict) or not a.get('id'): continue
+        choice=select_item(a.get('title',''),a.get('summary',''),a.get('source',''))
+        if choice:
+            a.update(kind=choice[0],category=choice[1],score=choice[2],use_case=choice[3])
+            seen[a['id']]=a
     sources=[]
     for feed in feeds:
         name=feed['name'];url=feed['url'];count=0
@@ -72,9 +93,10 @@ def build(feeds,previous):
                 title=clean(title);desc=clean(desc);date=iso_date(date)
                 if not date: continue
                 aid=hashlib.sha256(link.encode()).hexdigest()[:20]
-                sc=score_item(title,desc,feed['category'])
-                if sc<38:continue
-                article={'id':aid,'title':title,'summary':desc[:350] or '詳細は元の記事をご確認ください。','url':link,'source':name,'category':feed['category'],'published':date,'score':sc,'evaluation':'keyword_heuristic','use_case':'関連する制作技術・表現を元記事で確認してください。','caution':'キーワードによる自動評価です。内容の正確性や再現性は未検証です。','demo':False}
+                choice=select_item(title,desc,name)
+                if not choice:continue
+                kind,category,sc,use_case=choice
+                article={'id':aid,'title':title,'summary':desc[:350] or '詳細は元の記事をご確認ください。','url':link,'source':name,'category':category,'kind':kind,'published':date,'score':sc,'evaluation':'keyword_heuristic','use_case':use_case,'caution':'キーワードによる自動評価です。内容の正確性や再現性は未検証です。','demo':False}
                 if aid in seen:
                     old=seen[aid]
                     if old.get('evaluation')=='gemini':

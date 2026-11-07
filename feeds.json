@@ -1,8 +1,17 @@
 [
-  {"name":"Adobe After Effects Blog","category":"tools","url":"https://blog.adobe.com/en/topics/after-effects.rss"},
-  {"name":"School of Motion","category":"design","url":"https://www.schoolofmotion.com/blog/rss.xml"},
-  {"name":"Creative COW After Effects","category":"tools","url":"https://creativecow.net/forums/forum/adobe-after-effects/feed/"},
-  {"name":"Reddit After Effects","category":"tools","url":"https://www.reddit.com/r/AfterEffects/.rss"},
-  {"name":"Reddit Motion Design","category":"design","url":"https://www.reddit.com/r/MotionDesign/.rss"},
-  {"name":"Reddit Generative AI","category":"ai","url":"https://www.reddit.com/r/StableDiffusion/.rss"}
+  {
+    "name": "Stash — Studio Films",
+    "category": "design",
+    "url": "https://www.stashmedia.tv/feed/"
+  },
+  {
+    "name": "Toolfarm — Tools & Updates",
+    "category": "tools",
+    "url": "https://www.toolfarm.com/feed/"
+  },
+  {
+    "name": "Reddit After Effects",
+    "category": "tools",
+    "url": "https://www.reddit.com/r/AfterEffects/.rss"
+  }
 ]
