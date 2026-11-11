@@ -29,6 +29,8 @@ TITLES = {
 }
 for article in data['articles']:
     for field in ('title', 'summary'):
+        if article.get(field + '_ja'):
+            continue
         original = article.get(field, '')
         if field == 'summary':
             original = re.sub(r'\s*submitted by\s.*', '', original, flags=re.I).strip(' .')
@@ -45,6 +47,6 @@ for article in data['articles']:
             if not article[field + '_ja']:
                 article[field + '_ja'] = argostranslate.translate.translate(source, 'en', 'ja')
     article['translation'] = 'argos_machine_translation'
-data['notice'] = 'タイトル・RSSの抜粋を日本語に自動翻訳しています。誤訳や省略があるため、詳細は原文をご確認ください。評価はキーワードによる自動判定です。'
+data['notice'] = '公式ニュース・RSSのタイトルと抜粋を日本語に自動翻訳しています。誤訳や省略があるため、詳細は原文をご確認ください。評価はキーワードによる自動判定です。'
 path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n')
 print('Japanese translations:', len(data['articles']))

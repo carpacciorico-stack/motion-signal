@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Free-tier static RSS collector. Optional Gemini scoring; never requires paid services."""
 import hashlib, html, json, os, re, sys, time
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 from urllib.parse import urlparse
@@ -25,12 +25,39 @@ def child_text(el, names):
         if tag in names and c.text and c.text.strip():return c.text.strip()
     return ''
 
-def fetch(url):
+def fetch_bytes(url):
     req=Request(url,headers={'User-Agent':'MotionSignalReader/1.0 (+RSS research; personal project)','Accept':'application/rss+xml,application/atom+xml,application/xml,text/xml,*/*'})
     with urlopen(req,timeout=14) as resp:
         if resp.status != 200:raise ValueError('status '+str(resp.status))
-        content=resp.read(1500000)
-    return ET.fromstring(content)
+        content=resp.read(8000000)
+    return content
+
+def fetch(url):
+    return ET.fromstring(fetch_bytes(url))
+
+def feed_entries(feed):
+    if feed.get('type') != 'adobe_news':
+        entries = list(parse_entries(fetch(feed['url'])))
+        if not entries:
+            raise ValueError('配信から記事を読み取れませんでした')
+        return entries
+    data = json.loads(fetch_bytes(feed['url']))
+    cards = data.get('cards')
+    if not isinstance(cards, list) or not cards:
+        raise ValueError('Adobeニュース一覧の形式が変わりました')
+    entries = []
+    cutoff = datetime.now(timezone.utc) - timedelta(days=90)
+    for card in cards:
+        area = card.get('contentArea', {})
+        date = iso_date(card.get('cardDate', ''))
+        url = area.get('url', '')
+        if not date or datetime.fromisoformat(date) < cutoff: continue
+        if urlparse(url).hostname != 'news.adobe.com': continue
+        if not re.search(r'/news/\d{4}/\d{2}/', urlparse(url).path): continue
+        entries.append((area.get('title', ''), url, area.get('description', ''), date))
+    if not entries:
+        raise ValueError('Adobe公式の直近90日のニュースを取得できませんでした')
+    return entries
 
 def parse_entries(root):
     for entry in root.iter():
@@ -62,6 +89,15 @@ ANNOUNCEMENT = re.compile(r"releas|launch|introduc|new feature|what.s new|now av
 
 def select_item(title, summary, source):
     text = title + ' ' + summary
+    if source == 'Adobe公式ニュース':
+        if re.search(r'partnership|strategic alliance|financial results|revenue', title, re.I): return None
+        if re.search(r'after effects|premiere|firefly|creative cloud|substance|creative agent', text, re.I) and re.search(r'new|launch|introduc|expand|release|transform|update|announc', text, re.I):
+            return ('release', 'ai' if 'firefly' in title.lower() else 'tools', 85, 'Adobe公式の新機能・提供条件を確認し、制作環境への導入を検討できます。')
+        return None
+    if source == 'CG Channel — Releases':
+        if VIDEO.search(text) and re.search(r'releas|launch|unveil|new feature|now available|free again', title, re.I):
+            return ('release', 'tools', 80, '制作ソフトの新バージョン・新機能を確認できます。対応環境は提供元で確認してください。')
+        return None
     if QUESTION.search(title): return None
     if source == 'Stash — Studio Films':
         if any(re.search(r'(?<!\w)' + re.escape(name) + r'(?!\w)', text, re.I) for name in STUDIOS):
@@ -78,8 +114,10 @@ def score_item(title, summary, category):
 
 def build(feeds,previous):
     seen={}
+    active_sources={f['name'] for f in feeds}
     for a in previous:
         if not isinstance(a,dict) or not a.get('id'): continue
+        if a.get('source') not in active_sources: continue
         choice=select_item(a.get('title',''),a.get('summary',''),a.get('source',''))
         if choice:
             a.update(kind=choice[0],category=choice[1],score=choice[2],use_case=choice[3])
@@ -88,8 +126,8 @@ def build(feeds,previous):
     for feed in feeds:
         name=feed['name'];url=feed['url'];count=0
         try:
-            root=fetch(url)
-            for title,link,desc,date in parse_entries(root):
+            entries=feed_entries(feed)
+            for title,link,desc,date in entries:
                 title=clean(title);desc=clean(desc);date=iso_date(date)
                 if not date: continue
                 aid=hashlib.sha256(link.encode()).hexdigest()[:20]
@@ -99,10 +137,13 @@ def build(feeds,previous):
                 article={'id':aid,'title':title,'summary':desc[:350] or '詳細は元の記事をご確認ください。','url':link,'source':name,'category':category,'kind':kind,'published':date,'score':sc,'evaluation':'keyword_heuristic','use_case':use_case,'caution':'キーワードによる自動評価です。内容の正確性や再現性は未検証です。','demo':False}
                 if aid in seen:
                     old=seen[aid]
+                    if old.get('title') == title and old.get('summary') == article['summary']:
+                        for field in ('title_ja','summary_ja','translation'):
+                            if field in old: article[field]=old[field]
                     if old.get('evaluation')=='gemini':
                         for field in ('score','evaluation','use_case','caution','summary'):article[field]=old[field]
                 seen[aid]=article;count+=1
-            sources.append({'name':name,'status':'ok','items':count})
+            sources.append({'name':name,'status':'ok','items':count,'scanned':len(entries)})
             print(f'OK {name}: {count}')
         except Exception as e:
             sources.append({'name':name,'status':'error','items':0,'reason':str(e)[:120]})
@@ -148,8 +189,10 @@ def main():
         try:previous=json.loads(OUTPUT.read_text()).get('articles',[])
         except (ValueError,TypeError):pass
     articles,sources=build(feeds,previous)
+    if not any(s['status']=='ok' for s in sources):
+        raise RuntimeError('すべての収集元が失敗しました。前回のデータを保持します。')
     enriched=gemini_enrich(articles)
-    data={'generated_at':datetime.now(timezone.utc).isoformat(),'articles':articles,'sources':sources,'mode':'rss_gemini' if enriched else 'rss_only','notice':'RSS本文の要約と自動評価です。一次情報を必ず確認してください。Xの全件取得には対応していません。'}
+    data={'generated_at':datetime.now(timezone.utc).isoformat(),'articles':articles,'sources':sources,'mode':'rss_gemini' if enriched else 'rss_only','notice':'公式ニュース・公開RSSの抜粋と自動評価です。一次情報を必ず確認してください。'}
     OUTPUT.parent.mkdir(parents=True,exist_ok=True)
     OUTPUT.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
     print('Saved:',len(articles),'AI evaluated:',enriched,'successful sources:',sum(s['status']=='ok' for s in sources))

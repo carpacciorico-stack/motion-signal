@@ -1,5 +1,16 @@
 [
   {
+    "name": "Adobe公式ニュース",
+    "type": "adobe_news",
+    "category": "tools",
+    "url": "https://www.adobe.com/chimera-api/collection?originSelection=news&language=en&country=us&size=1000&draft=false"
+  },
+  {
+    "name": "CG Channel — Releases",
+    "category": "tools",
+    "url": "https://www.cgchannel.com/feed/"
+  },
+  {
     "name": "Stash — Studio Films",
     "category": "design",
     "url": "https://www.stashmedia.tv/feed/"
@@ -8,10 +19,5 @@
     "name": "Toolfarm — Tools & Updates",
     "category": "tools",
     "url": "https://www.toolfarm.com/feed/"
-  },
-  {
-    "name": "Reddit After Effects",
-    "category": "tools",
-    "url": "https://www.reddit.com/r/AfterEffects/.rss"
   }
 ]
