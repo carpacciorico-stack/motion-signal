@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-12T01:36:02.546571+00:00",
+  "generated_at": "2026-11-13T01:29:58.664191+00:00",
   "articles": [
     {
       "id": "f6246405698bab4020df",
@@ -244,6 +244,26 @@
       "summary_original": "Bass X Machina , the six-episode animated steampunk Western premiered on Netflix Nov 3 with this gritty title sequence, created by the motion crew at BUCK and powered by a track from singer/songwriter Janelle Monáe. [Watch] The post Alt Western: Buck Opens Bass X Machina on Netflix appeared first on Motion design - STASH",
       "summary_ja": "Bass X Machina、Netflix 11月3日に初演した6枚のエピソデアニメーションスチームパンクの西洋は、この悲劇的なタイトルシーケンスで、BUCKのモーションクルーによって作成され、歌手/ソングライター Janelle Monáeのトラックによって駆動されます。 [見る] ポストアルト・ウェスタン:バック・オープンズ・バスXマチナ・オン・ネットフリックスが最初に登場 - STASH",
       "translation": "argos_machine_translation"
+    },
+    {
+      "id": "1898a35b9def175ca662",
+      "title": "NIM Labs launches NIM 7.0",
+      "summary": "Studio management platform for VFX and visualization gets new scheduling, conflict detection and resource usage tracking features.",
+      "url": "https://www.cgchannel.com/2024/09/nim-labs-launches-nim-7-0/",
+      "source": "CG Channel — Releases",
+      "category": "tools",
+      "kind": "release",
+      "published": "2024-09-25T04:00:13+00:00",
+      "score": 80,
+      "evaluation": "keyword_heuristic",
+      "use_case": "制作ソフトの新バージョン・新機能を確認できます。対応環境は提供元で確認してください。",
+      "caution": "キーワードによる自動評価です。内容の正確性や再現性は未検証です。",
+      "demo": false,
+      "title_original": "NIM Labs launches NIM 7.0",
+      "title_ja": "NIM LabsがNIM 7.0を発売",
+      "summary_original": "Studio management platform for VFX and visualization gets new scheduling, conflict detection and resource usage tracking features",
+      "summary_ja": "VFXおよびビジュアライゼーションのためのスタジオ管理プラットフォームは、新しいスケジューリング、競合検知、リソース使用トラッキング機能を取得します。",
+      "translation": "argos_machine_translation"
     }
   ],
   "sources": [
@@ -256,7 +276,7 @@
     {
       "name": "CG Channel — Releases",
       "status": "ok",
-      "items": 5,
+      "items": 1,
       "scanned": 10
     },
     {
