@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-13T01:29:58.664191+00:00",
+  "generated_at": "2026-11-14T01:26:39.396092+00:00",
   "articles": [
     {
       "id": "f6246405698bab4020df",
@@ -259,9 +259,7 @@
       "use_case": "制作ソフトの新バージョン・新機能を確認できます。対応環境は提供元で確認してください。",
       "caution": "キーワードによる自動評価です。内容の正確性や再現性は未検証です。",
       "demo": false,
-      "title_original": "NIM Labs launches NIM 7.0",
       "title_ja": "NIM LabsがNIM 7.0を発売",
-      "summary_original": "Studio management platform for VFX and visualization gets new scheduling, conflict detection and resource usage tracking features",
       "summary_ja": "VFXおよびビジュアライゼーションのためのスタジオ管理プラットフォームは、新しいスケジューリング、競合検知、リソース使用トラッキング機能を取得します。",
       "translation": "argos_machine_translation"
     }
