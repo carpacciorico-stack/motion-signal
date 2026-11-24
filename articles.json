@@ -1,6 +1,26 @@
 {
-  "generated_at": "2026-11-23T01:39:20.910544+00:00",
+  "generated_at": "2026-11-24T01:38:40.554845+00:00",
   "articles": [
+    {
+      "id": "752042b4d8ea2087f105",
+      "title": "ManvsMachine Opens Hood Summit ’26 for Robinhood",
+      "summary": "Earlier this fall, the American financial services and electronic trading platform Robinhood opened their third annual flagship event in Houston with this perfectly austere, space-zen sequence by the team at ManvsMachine. [Watch] The post ManvsMachine Opens Hood Summit ’26 for Robinhood appeared first on Motion design - STASH .",
+      "url": "https://www.stashmedia.tv/manvsmachine-opens-hood-summit-26-for-robinhood/",
+      "source": "Stash — Studio Films",
+      "category": "design",
+      "kind": "studio",
+      "published": "2026-11-23T15:42:17+00:00",
+      "score": 78,
+      "evaluation": "keyword_heuristic",
+      "use_case": "スタジオ作品の演出・質感・モーション表現を制作の参考にできます。",
+      "caution": "キーワードによる自動評価です。内容の正確性や再現性は未検証です。",
+      "demo": false,
+      "title_original": "ManvsMachine Opens Hood Summit ’26 for Robinhood",
+      "title_ja": "ManvsMachineがフードサミット「26」をロビン時代にオープン",
+      "summary_original": "Earlier this fall, the American financial services and electronic trading platform Robinhood opened their third annual flagship event in Houston with this perfectly austere, space-zen sequence by the team at ManvsMachine. [Watch] The post ManvsMachine Opens Hood Summit ’26 for Robinhood appeared first on Motion design - STASH",
+      "summary_ja": "この秋、アメリカの金融サービスと電子取引プラットフォームであるRobinhoodは、ヒューストンで3年目の恒例のフラッグシップイベントをオープンしました。このイベントは、MandvsMachineのチームによるスペース・オール・シーケンスです。 [時計] ポストのManvsMachine Opens Hood Summit ’26 for Robinhoodが最初に登場しました モーションデザイン - STASH",
+      "translation": "argos_machine_translation"
+    },
     {
       "id": "8be063afb9e27e07528e",
       "title": "Blinkink Signs Director Emma Debany for representation Across UK and Europe",
@@ -327,14 +347,14 @@
     },
     {
       "name": "CG Channel — Releases",
-      "status": "ok",
-      "items": 1,
-      "scanned": 10
+      "status": "error",
+      "items": 0,
+      "reason": "The read operation timed out"
     },
     {
       "name": "Stash — Studio Films",
       "status": "ok",
-      "items": 1,
+      "items": 2,
       "scanned": 6
     },
     {
