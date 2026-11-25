@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-24T01:38:40.554845+00:00",
+  "generated_at": "2026-11-25T01:43:40.758731+00:00",
   "articles": [
     {
       "id": "752042b4d8ea2087f105",
@@ -15,10 +15,28 @@
       "use_case": "スタジオ作品の演出・質感・モーション表現を制作の参考にできます。",
       "caution": "キーワードによる自動評価です。内容の正確性や再現性は未検証です。",
       "demo": false,
-      "title_original": "ManvsMachine Opens Hood Summit ’26 for Robinhood",
       "title_ja": "ManvsMachineがフードサミット「26」をロビン時代にオープン",
-      "summary_original": "Earlier this fall, the American financial services and electronic trading platform Robinhood opened their third annual flagship event in Houston with this perfectly austere, space-zen sequence by the team at ManvsMachine. [Watch] The post ManvsMachine Opens Hood Summit ’26 for Robinhood appeared first on Motion design - STASH",
       "summary_ja": "この秋、アメリカの金融サービスと電子取引プラットフォームであるRobinhoodは、ヒューストンで3年目の恒例のフラッグシップイベントをオープンしました。このイベントは、MandvsMachineのチームによるスペース・オール・シーケンスです。 [時計] ポストのManvsMachine Opens Hood Summit ’26 for Robinhoodが最初に登場しました モーションデザイン - STASH",
+      "translation": "argos_machine_translation"
+    },
+    {
+      "id": "e3824f0fcb14cda71371",
+      "title": "Escape Motions releases Rebelle 8.4",
+      "summary": "Check out the latest features in the natural media painting software, including new controls for brushstrokes and texture overlays.",
+      "url": "https://www.cgchannel.com/2026/11/escape-motions-releases-rebelle-8/",
+      "source": "CG Channel — Releases",
+      "category": "tools",
+      "kind": "release",
+      "published": "2026-11-23T06:30:31+00:00",
+      "score": 80,
+      "evaluation": "keyword_heuristic",
+      "use_case": "制作ソフトの新バージョン・新機能を確認できます。対応環境は提供元で確認してください。",
+      "caution": "キーワードによる自動評価です。内容の正確性や再現性は未検証です。",
+      "demo": false,
+      "title_original": "Escape Motions releases Rebelle 8.4",
+      "title_ja": "Escape MotionsがRebelle 8.4をリリース",
+      "summary_original": "Check out the latest features in the natural media painting software, including new controls for brushstrokes and texture overlays",
+      "summary_ja": "ブラシストロークとテクスチャオーバーレイのための新しい制御を含む自然メディア塗装ソフトウェアの最新機能をチェック",
       "translation": "argos_machine_translation"
     },
     {
@@ -347,9 +365,9 @@
     },
     {
       "name": "CG Channel — Releases",
-      "status": "error",
-      "items": 0,
-      "reason": "The read operation timed out"
+      "status": "ok",
+      "items": 3,
+      "scanned": 10
     },
     {
       "name": "Stash — Studio Films",
