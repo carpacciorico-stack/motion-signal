@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T01:43:40.758731+00:00",
+  "generated_at": "2026-11-26T01:44:07.879734+00:00",
   "articles": [
     {
       "id": "752042b4d8ea2087f105",
@@ -33,9 +33,7 @@
       "use_case": "制作ソフトの新バージョン・新機能を確認できます。対応環境は提供元で確認してください。",
       "caution": "キーワードによる自動評価です。内容の正確性や再現性は未検証です。",
       "demo": false,
-      "title_original": "Escape Motions releases Rebelle 8.4",
       "title_ja": "Escape MotionsがRebelle 8.4をリリース",
-      "summary_original": "Check out the latest features in the natural media painting software, including new controls for brushstrokes and texture overlays",
       "summary_ja": "ブラシストロークとテクスチャオーバーレイのための新しい制御を含む自然メディア塗装ソフトウェアの最新機能をチェック",
       "translation": "argos_machine_translation"
     },
@@ -372,7 +370,7 @@
     {
       "name": "Stash — Studio Films",
       "status": "ok",
-      "items": 2,
+      "items": 1,
       "scanned": 6
     },
     {
