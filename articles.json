@@ -1,6 +1,46 @@
 {
-  "generated_at": "2026-11-27T01:44:21.128221+00:00",
+  "generated_at": "2026-11-28T01:40:52.959543+00:00",
   "articles": [
+    {
+      "id": "47c3817db9089ab9786a",
+      "title": "OctaneStudio+ 2027 launches with Greyscalegorilla x KitBash3D",
+      "summary": "[Sponsored] Discover the amazing software, assets and cloud credits available with subscriptions to the Octane renderer this Black Friday.",
+      "url": "https://www.cgchannel.com/2026/11/octanestudio-2027-launches-with-greyscalegorilla-x-kitbash3d-and-more/",
+      "source": "CG Channel — Releases",
+      "category": "tools",
+      "kind": "release",
+      "published": "2026-11-27T07:23:37+00:00",
+      "score": 80,
+      "evaluation": "keyword_heuristic",
+      "use_case": "制作ソフトの新バージョン・新機能を確認できます。対応環境は提供元で確認してください。",
+      "caution": "キーワードによる自動評価です。内容の正確性や再現性は未検証です。",
+      "demo": false,
+      "title_original": "OctaneStudio+ 2027 launches with Greyscalegorilla x KitBash3D",
+      "title_ja": "OctaneStudio+ 2027がGreyscalegorilla x KitBash3Dでリリース",
+      "summary_original": "[Sponsored] Discover the amazing software, assets and cloud credits available with subscriptions to the Octane renderer this Black Friday",
+      "summary_ja": "[スポンサー] このブラックフライデーのオクタン・レンダラーへのサブスクリプションで利用可能な素晴らしいソフトウェア、アセット、クラウドクレジットを発見",
+      "translation": "argos_machine_translation"
+    },
+    {
+      "id": "fccf6eeee7e610e0e712",
+      "title": "Nekki releases Cascadeur 2026.3 and offers 40% off for Black Friday",
+      "summary": "[Sponsored] Discover the new facial animation and creature rigging tools in the AI-assisted animation app - and buy it at a Black Friday discount.",
+      "url": "https://www.cgchannel.com/2026/11/nekki-releases-cascadeur-2026-3-and-offers-40-off-for-black-friday/",
+      "source": "CG Channel — Releases",
+      "category": "tools",
+      "kind": "release",
+      "published": "2026-11-26T15:00:34+00:00",
+      "score": 80,
+      "evaluation": "keyword_heuristic",
+      "use_case": "制作ソフトの新バージョン・新機能を確認できます。対応環境は提供元で確認してください。",
+      "caution": "キーワードによる自動評価です。内容の正確性や再現性は未検証です。",
+      "demo": false,
+      "title_original": "Nekki releases Cascadeur 2026.3 and offers 40% off for Black Friday",
+      "title_ja": "Nekki リリース Cascadeur 2026.3 と提供 40% off for ブラックフライデー",
+      "summary_original": "[Sponsored] Discover the new facial animation and creature rigging tools in the AI-assisted animation app - and buy it at a Black Friday discount",
+      "summary_ja": "[スポンサー] AI支援アニメーションアプリで新しい顔のアニメーションと生き物をリギングするツールを発見し、ブラックフライデー割引で購入",
+      "translation": "argos_machine_translation"
+    },
     {
       "id": "752042b4d8ea2087f105",
       "title": "ManvsMachine Opens Hood Summit ’26 for Robinhood",
@@ -364,7 +404,7 @@
     {
       "name": "CG Channel — Releases",
       "status": "ok",
-      "items": 1,
+      "items": 3,
       "scanned": 10
     },
     {
